@@ -29,3 +29,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Service\CustomerService:
+        public: true
+
+    App\Service\UserLoader:
+        public: true
+        arguments:
+            $userApiBaseUri: '%env(USERS_API_BASE_URI)%'
+
+    App\Event\ApiExceptionEvent:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
